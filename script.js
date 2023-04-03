@@ -9,11 +9,15 @@ let compterSelection;
 
 
 function getPlayerSelection(){
-    playerSelection = prompt('Please enter rock, paper or scissors', '');
+    playerSelection = prompt('Please enter rock, paper or scissors', '').toLowerCase();
+    if (playerSelection === 'rock' || playerSelection === 'paper' || playerSelection === 'scissors') {
+        console.log(`You chose ${playerSelection}.`);
+        return playerSelection;
+    } else {
+        console.log(`${playerSelection} is an invalid word.`);
+    }
 }
 getPlayerSelection();
-
-console.log(playerSelection);
 
 function getComputerSelection(){
     const optionsArray = ['rock', 'paper', 'scissors'];
@@ -21,15 +25,25 @@ function getComputerSelection(){
 }
 
 function playRound(playerSelection, computerSelection){
+    
+
+    
     if (playerSelection === computerSelection){
         return "tie";
     } else if (playerSelection === "rock" && computerSelection === "scissors" ||
                playerSelection === "paper" && computerSelection === "rock" ||
                playerSelection === "scissors" && computerSelection === "paper"){
-        return "win";
+        playerScore++;
+        playerScore =+ playerScore;
+        let result = console.log(`You won!, your score is ${playerScore}`);        
+        return result;
+        
 
     } else {
-        return "lose";
+        computerScore++;
+        computerScore =+computerScore;
+        let result = console.log(`You lost!, the computers score is ${computerScore}`);
+        return result;
     }
 
 }

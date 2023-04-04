@@ -1,13 +1,5 @@
 
-
-let playerScore = 0;
-let computerScore = 0;
-let playerSelection;
-let compterSelection;
-
-
-
-
+let result = 0;
 function getPlayerSelection(){
     playerSelection = prompt('Please enter rock, paper or scissors', '').toLowerCase();
     if (playerSelection === 'rock' || playerSelection === 'paper' || playerSelection === 'scissors') {
@@ -17,40 +9,48 @@ function getPlayerSelection(){
         console.log(`${playerSelection} is an invalid word.`);
     }
 }
-getPlayerSelection();
+
 
 function getComputerSelection(){
     const optionsArray = ['rock', 'paper', 'scissors'];
-    return computerSelection = optionsArray[~~(Math.random()*optionsArray.length)] //~~=math.floor
+    return computerSelection = optionsArray[Math.floor(Math.random()*optionsArray.length)] 
 }
 
-function playRound(playerSelection, computerSelection){
+function playRound(){
+    getPlayerSelection();
+    //playerSelection = prompt("Rock, Paper or Scissors", "").toLowerCase();
     
-
     
-    if (playerSelection === computerSelection){
+    if (playerSelection == getComputerSelection()){
+        result = 0
         return "tie";
-    } else if (playerSelection === "rock" && computerSelection === "scissors" ||
-               playerSelection === "paper" && computerSelection === "rock" ||
-               playerSelection === "scissors" && computerSelection === "paper"){
-        playerScore++;
-        playerScore =+ playerScore;
-        let result = console.log(`You won!, your score is ${playerScore}`);        
-        return result;
+    } else if (playerSelection == "rock" && getComputerSelection() == "scissors" ||
+               playerSelection == "paper" && getComputerSelection() == "rock" ||
+               playerSelection == "scissors" && getComputerSelection() == "paper"){
+        result = 1;     
+        return "win";
         
 
     } else {
-        computerScore++;
-        computerScore =+computerScore;
-        let result = console.log(`You lost!, the computers score is ${computerScore}`);
-        return result;
+        result = -1;
+        return "lose";
     }
-
+    
 }
 
-getComputerSelection();
-console.log(playRound(playerSelection, computerSelection));
+
 
 function game(){
-
+    let scores = [0,0];
+    for(let i=0;i<5;i++){
+        playRound();
+        if (result == 1){
+            scores[0]=(scores[0]+1)
+        } else if (result == -1) {
+            scores[1]=(scores[1]+1)
+        }
+    }
+    console.log("Player has a score of:" +scores[0]);
+    console.log("Computer has a score of:" +scores[1]);
 }
+game();

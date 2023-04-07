@@ -25,11 +25,10 @@ playerPaper.addEventListener('mouseover', playerHover);
 playerScissors.addEventListener('mouseover', playerHover);
 
 //Allow player to hover over buttons if game is still in play (less than 5 points)
-/*function playerHover() {
-    if(playerPoints<=4 && computerPoints<=4){
+function playerHover() {
         this.classList.add('playerHover');
-    }
-}*/
+    
+}
 
 // players Event Listener to remove :hover state
 playerRock.addEventListener('mouseleave', removeHover);

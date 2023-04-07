@@ -32,6 +32,14 @@ function playerHover() {
         this.classList.add('playerHover');
     }
 }
+// User's Button Event Listener to remove :hover state
+playerRock.addEventListener('mouseleave', removeHover);
+playerPaper.addEventListener('mouseleave', removeHover);
+playerScissors.addEventListener('mouseleave', removeHover);
+
+function removeHover(){
+    this.classList.remove('playerHover');
+}
 
 
 /*function getPlayerSelection(){
@@ -50,24 +58,50 @@ function getComputerSelection(){
     return computerSelection = optionsArray[Math.floor(Math.random()*optionsArray.length)] 
 }
 
+function computerAnimation(computerSelection) {
+    if (computerSelection == 'rock') {
+        removeColour();
+        computerRock.classList.add('computerPick');
+    }
+    if (computerSelection == 'paper') {
+        removeColour();
+        computerPaper.classList.add('computerPick');
+    }
+    if (computerSelection == 'scissors') {
+        removeColour();
+        computerScissors.classList.add('computerPick');
+    }
+
+}
+
+function removeColour() {
+    computerRock.classList.remove('computerPick');
+    computerPaper.classList.remove('computerPick');
+    computerScissors.classList.remove('computerPick');
+}
+
 function playRound(playerSelection, computerSelection){
     playerSelection=this.dataset.button;
     computerSelection=getComputerSelection();
     //playerSelection = prompt("Rock, Paper or Scissors", "").toLowerCase();
     this.classList.add('playerClick');
-    updatePoints();
+    
     
     if (playerSelection == computerSelection){
         roundNum++;
-    } else if (playerSelection == "rock" && getComputerSelection() == "scissors" ||
-               playerSelection == "paper" && getComputerSelection() == "rock" ||
-               playerSelection == "scissors" && getComputerSelection() == "paper"){     
+        updatePoints();
+    } else if (playerSelection == "rock" && computerSelection == "scissors" ||
+               playerSelection == "paper" && computerSelection == "rock" ||
+               playerSelection == "scissors" && computerSelection == "paper"){     
         playerPoints++;
         roundNum++;
+        updatePoints();
     } else {
         computerPoints++;
         roundNum++;
+        updatePoints();
     }
+    computerAnimation(computerSelection);
 }
 
 
@@ -76,7 +110,19 @@ playerPaper.addEventListener('click', playRound);
 playerRock.addEventListener('click', playRound);
 playerScissors.addEventListener('click', playRound);
 
+function removeClick() {
+    this.classList.remove('playerClick');
+    this.classList.remove('playerHover');
+}
 
+playerRock.addEventListener('transitionend', removeClick);
+playerPaper.addEventListener('transitionend', removeClick);
+playerScissors.addEventListener('transitionend', removeClick);
+
+// "Computer's Buttons" to remove animation
+computerRock.addEventListener('transitionend', removeColour);
+computerPaper.addEventListener('transitionend', removeColour);
+computerScissors.addEventListener('transitionend', removeColour);
 
 /*function game(){
     let scores = [0,0];

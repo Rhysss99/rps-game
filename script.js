@@ -35,12 +35,12 @@ function playRound(){
         result = -1;
         return "lose";
     }
-    
 }
+playRound();
 
 
 
-function game(){
+/*function game(){
     let scores = [0,0];
     for(let i=0;i<5;i++){
         playRound();
@@ -52,5 +52,5 @@ function game(){
     }
     console.log("Player has a score of:" +scores[0]);
     console.log("Computer has a score of:" +scores[1]);
-}
-game();
+}*/
+
